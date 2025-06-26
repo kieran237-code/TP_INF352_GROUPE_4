@@ -96,7 +96,7 @@ Prérequis:
 *lancer les seeders 
 	~: npx sequelize-cli db:seed:all --config sequelize.config.js --seeders-path src/seeders 
         
-	(si au lancement des seeders il y as erreur ce que vous devez faire se connecter a la Base de donnee a partir de 
+	(si au lancement des seeders il y as unr erreur ,ce que vous devez faire se connecter a la Base de donnee a partir de 
  		~:sudo docker exec -it mysql-propelize bash
    		 puis : bash-5.1# mysql -u root -p  
       		 entrer le mot de passe par defaut root ; se connecter a la Base de donnee propelize et  faire un truncate des tables {truncate users , truncate vehicles}
