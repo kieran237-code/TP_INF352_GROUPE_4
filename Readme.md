@@ -58,7 +58,7 @@ Avant tous faut prealable :
 
 # Cloner le dépôt et naviguer vers le répertoire du projet
 	git clone <URL_DE_VOTRE_DEPOT>
-	cd tp_bi(v3) # Naviguez vers le dossier racine du projet
+	# Naviguez vers le dossier racine du projet
 #  ============INSTALLATION DES DEPENDANCES BACKEND ET TEST===================
  
 1. Stack Technologique
