@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+    <title>Inscription👤</title>
+</head>
+<body>
+    <section>
+        <div class="imgBox"></div>
+        <div class="contentBox">
+            <div class="formBox">
+                <h2>Inscription👤</h2>
+                <form id="registerForm"> <div class="inputBx">
+                        <span>Nom</span>
+                        <input type="text" id="name" required> </div>
+                    <div class="inputBx">
+                        <span>Mot de Passe</span>
+                        <input type="password" id="password" required> </div>
+                    <div class="inputBx">
+                        <input type="submit" value="S'inscrire">
+                    </div>
+                    <div class="inputBx">
+                        <p>Vous avez déjà un compte ? <a href="login.html">Connexion</a></p>
+                    </div>
+                    <p id="message" style="color: red; margin-top: 10px;"></p> </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+ 
+        document.getElementById('registerForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = ''; 
+
+            try {
+                const response = await fetch('/users/register', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageElement.style.color = 'green';
+                    messageElement.textContent = 'Inscription réussie ! Vous pouvez maintenant vous connecter.';
+                     setTimeout(() => {
+                        window.location.href = 'login.html';
+                     }, 3000);
+                } else {
+                    messageElement.style.color = 'red';
+                    messageElement.textContent = data.error || 'Erreur d\'inscription.';
+                }
+            } catch (error) {
+                console.error('Erreur réseau ou du serveur:', error);
+                messageElement.style.color = 'red';
+                messageElement.textContent = 'Impossible de se connecter au serveur.';
+            }
+        });
+    </script>
+</body>
+</html>

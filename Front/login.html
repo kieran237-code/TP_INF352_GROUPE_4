@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+    <title>Connexion🔐</title>
+</head>
+<body>
+    <section>
+        <div class="imgBox"></div>
+        <div class="contentBox">
+            <div class="formBox">
+                <h2>Connexion🔐</h2>
+                <form id="loginForm"> <div class="inputBx">
+                        <span>Nom</span>
+                        <input type="text" id="name" required> </div>
+                    <div class="inputBx">
+                        <span>Mot de Passe</span>
+                        <input type="password" id="password" required> </div>
+                    <div class="inputBx">
+                        <input type="submit" value="Connexion">
+                    </div>
+                    <div class="inputBx">
+                        <p>Vous n'avez pas de compte <a href="register.html">Inscription</a></p>
+                    </div>
+                    <p id="message" style="color: red; margin-top: 10px;"></p> </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Le code JavaScript pour gérer la soumission du formulaire
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Empêche le rechargement de la page par défaut
+
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = ''; 
+
+            try {
+                const response = await fetch('http://localhost:3000/users/login', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    console.log('Access Token:', data.accessToken);
+                    // Stocke le token (par exemple dans le localStorage)
+                    localStorage.setItem('accessToken', data.accessToken);
+                    // Redirige l'utilisateur vers une autre page après connexion réussie
+                
+                    window.location.href = 'home.html'; // Remplace par ta page de tableau de bord
+                } else {
+                    messageElement.style.color = 'red';
+                    messageElement.textContent = data.error || 'Erreur de connexion.';
+                }
+            } catch (error) {
+                console.error('Erreur réseau ou du serveur:', error);
+                messageElement.style.color = 'red';
+                messageElement.textContent = 'Impossible de se connecter au serveur.';
+            }
+        });
+    </script>
+</body>
+</html>
