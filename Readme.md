@@ -92,6 +92,7 @@ Prérequis:
 	ps : toujours vérifier la présence du docker-compose.yml  à la racine du projet.
   	~: 
   	sudo docker compose up -d
+  	Si en lancant sudo docker compose up -d vous avez une erreur tels que le container mysql-propelize n est pas construis parfaitement vous devez d abord le supprimez avec : sudo docker rm mysql-propelize valider puis relancer sudo docker compose up -d
  
 *lancer les seeders 
 	~: npx sequelize-cli db:seed:all --config sequelize.config.js --seeders-path src/seeders 
