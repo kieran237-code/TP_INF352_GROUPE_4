@@ -120,7 +120,8 @@ Prérequis:
 
 
 # ============INSTALLATION DES DEPENDANCES FRONTEND ET TEST===================
- 
+
+   Le Serveur doit etre lancer 
  1. Installer les dépendances spécifiques à Playwright (Frontend)
  
    ~cd Front/my-playwright-project/
